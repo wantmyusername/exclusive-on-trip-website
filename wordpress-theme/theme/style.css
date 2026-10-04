@@ -1,0 +1,77 @@
+/*
+Theme Name: Exclusive On Trip
+Theme URI: https://exclusiveontrip.com/
+Author: Jesús Rodríguez
+Author URI: https://exclusiveontrip.com/
+Description: Tema de WordPress del blog de Exclusive On Trip, a juego con el sitio principal. Agencia de tours y experiencias exclusivas en Cancún y la Riviera Maya.
+Version: 1.1
+Requires at least: 5.8
+Tested up to: 6.7
+Requires PHP: 7.4
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: exclusive-on-trip
+Tags: blog, custom-logo, featured-images, responsive-layout
+*/
+
+/* Tipografías */
+h1, h2, h3, h4, h5, .poppins {
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Contenido del blog */
+.blog-content p {
+    margin-bottom: 1.5rem;
+    line-height: 1.8;
+    color: #374151; /* gray-700 */
+    font-size: 1.125rem; /* text-lg */
+}
+.blog-content h2 {
+    font-size: 1.875rem;
+    font-weight: 700;
+    color: #0f172a;
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+}
+.blog-content h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #0f172a;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+}
+.blog-content ul {
+    list-style-type: disc;
+    padding-left: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+.blog-content ol {
+    list-style-type: decimal;
+    padding-left: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+.blog-content li {
+    margin-bottom: 0.5rem;
+}
+.blog-content strong {
+    font-weight: 700;
+    color: #111827;
+}
+.blog-content a {
+    color: #0098b6;
+    text-decoration: underline;
+}
+.blog-content img {
+    border-radius: 1rem;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    width: 100%;
+    height: auto;
+}
+
+/* Iconos Lucide: tamaño por defecto si faltan las utilidades de Tailwind */
+.lucide {
+    display: inline-block;
+    vertical-align: middle;
+    flex-shrink: 0;
+}

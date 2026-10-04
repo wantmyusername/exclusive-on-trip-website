@@ -52,6 +52,27 @@ public/
 - **Color de marca:** `--color-brand` en `src/styles/global.css`
 - **Imágenes:** `public/imgs/`
 
+## 📝 Blog de WordPress (tema)
+
+El blog (en `/blog/`) corre en **WordPress** con un tema propio que replica el estilo del sitio. Incluido en `wordpress-theme/`:
+
+```
+wordpress-theme/
+├── exclusive-theme.zip   # Tema listo para instalar
+├── screenshot.png        # Vista previa
+└── theme/                # Código fuente (editable)
+    ├── header.php        # Navbar + menú móvil
+    ├── footer.php        # Footer
+    ├── index.php         # Listado del blog
+    ├── single.php        # Artículo individual
+    ├── functions.php     # Setup del tema
+    ├── style.css         # Declaración del tema + estilos del contenido
+    └── assets/           # logos (logo.png, logo-mark.png)
+```
+
+**Instalación:** WordPress → Apariencia → Temas → Añadir nuevo → **Subir tema** → `exclusive-theme.zip`.
+Para actualizar el tema: edita los archivos en `wordpress-theme/theme/` y vuelve a comprimir la carpeta como `exclusive-theme.zip`. El diseño y la paleta se toman del sitio principal (turquesa `#34efdc` + pizarra, Poppins/Lato); los iconos usan [Lucide](https://lucide.dev/).
+
 ## 🌐 Deploy
 
 El sitio es estático; publica la carpeta `dist/` en cualquier hosting (Netlify, Vercel, Cloudflare Pages o hosting tradicional).
