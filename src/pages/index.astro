@@ -1,0 +1,359 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Icon from "../components/Icon.astro";
+import TourCard from "../components/TourCard.astro";
+import { SITE, TOURS, SERVICES, REVIEWS, FAQS, HERO_IMAGES } from "../data/content.js";
+
+const popular = TOURS.filter((t) => t.popular).slice(0, 3);
+const [mainTour, ...sideTours] = popular;
+const featuredServices = SERVICES.slice(0, 3);
+
+const features = [
+  {
+    icon: "clock",
+    title: "Pickup Puntual",
+    text: "Tu tiempo es oro. Garantizamos puntualidad en cada recogida.",
+  },
+  {
+    icon: "credit-card",
+    title: "Paga al Abordar",
+    text: "Sin depósitos ocultos. Reserva hoy y liquida el día de tu actividad.",
+  },
+  {
+    icon: "info",
+    title: "Asesoría 24/7",
+    text: "Expertos locales disponibles todo el día para ayudarte.",
+  },
+];
+---
+
+<Layout
+  title="Tours, Servicios y Experiencias VIP en Cancún"
+  description="Reserva los mejores tours en Cancún, Riviera Maya y Tulum. Transporte privado, renta de yates, parques Xcaret y Chichén Itzá. ¡Paga al abordar!"
+>
+  <!-- HERO -->
+  <section
+    class="relative h-[85vh] flex items-center justify-center overflow-hidden bg-slate-900"
+    aria-label="Bienvenida"
+  >
+    <div class="absolute inset-0 z-0">
+      <img
+        id="hero-img"
+        src=""
+        alt="Cancún Paraíso — Exclusive On Trip"
+        class="w-full h-full object-cover opacity-0"
+      />
+      <div class="absolute inset-0 bg-gradient-to-b from-black/70 via-black/20 to-[#f6f8f8]"></div>
+    </div>
+    <div class="container mx-auto px-6 relative z-10 text-center hero-content">
+      <span
+        class="poppins inline-flex items-center gap-2 py-2 px-6 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white text-[10px] font-semibold uppercase tracking-[0.2em] mb-8 shadow-2xl"
+      >
+        🌟 Agencia de Viajes #1 en Cancún
+      </span>
+      <h1
+        class="poppins text-5xl md:text-8xl font-bold text-white mb-6 leading-[0.9] tracking-tighter drop-shadow-2xl"
+      >
+        Experiencias únicas,<br />
+        <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand to-emerald-300">
+          hechas a tu medida.
+        </span>
+      </h1>
+      <p class="text-white/80 text-lg md:text-xl max-w-2xl mx-auto font-medium mb-10 drop-shadow-md">
+        Creamos tours, viajes y circuitos increíbles para convertir tus próximas vacaciones en
+        recuerdos inolvidables.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a
+          href="/tours"
+          class="poppins inline-flex items-center justify-center gap-2 bg-brand text-slate-900 px-10 py-4 rounded-full font-bold text-sm uppercase tracking-widest hover:scale-105 transition-transform shadow-2xl"
+        >
+          Ver Tours <Icon name="arrow-right" class="w-4 h-4" />
+        </a>
+        <a
+          href={`https://wa.me/${SITE.whatsapp}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="poppins inline-flex items-center justify-center gap-2 bg-white/10 backdrop-blur-md border border-white/20 text-white px-10 py-4 rounded-full font-bold text-sm uppercase tracking-widest hover:bg-white/20 transition-colors"
+        >
+          <Icon name="phone" class="w-4 h-4" /> Personalizar Viaje
+        </a>
+      </div>
+    </div>
+    <div class="scroll-bounce absolute bottom-10 left-1/2 z-10">
+      <div class="w-px h-12 bg-gradient-to-b from-white/50 to-transparent"></div>
+    </div>
+  </section>
+
+  <script type="application/json" id="hero-images" set:html={JSON.stringify(HERO_IMAGES)} />
+
+  <!-- TOURS POPULARES -->
+  <section class="max-w-[1200px] mx-auto px-6 py-24" aria-label="Tours populares">
+    <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+      <div>
+        <span class="poppins text-brand font-bold uppercase tracking-[0.3em] text-[10px] mb-2 block">
+          Experiencias en Cancún
+        </span>
+        <h2 class="poppins text-4xl md:text-6xl font-bold tracking-tighter text-slate-900">
+          Tours Populares
+        </h2>
+        <div class="w-16 h-[2px] bg-slate-200 mt-6 mb-4"></div>
+        <p class="poppins text-[11px] md:text-xs uppercase tracking-[0.25em] text-slate-500 leading-relaxed">
+          ¿Buscas algo personalizado?<br />
+          <a
+            href={`https://wa.me/${SITE.whatsapp}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-slate-900 hover:text-brand transition-colors font-semibold normal-case tracking-normal"
+          >
+            WhatsApp {SITE.phoneDisplay}
+          </a>
+        </p>
+      </div>
+      <a
+        href="/tours"
+        class="poppins flex items-center gap-2 text-slate-800 font-bold hover:text-brand transition-all group"
+      >
+        Ver catálogo completo
+        <Icon name="arrow-right" class="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+      </a>
+    </div>
+
+    <div class="grid lg:grid-cols-12 gap-12 items-stretch">
+      <div
+        class="lg:col-span-7 dest-main group relative min-h-[550px] overflow-hidden rounded-[3rem] shadow-2xl cursor-pointer isolate"
+        data-tour-id={mainTour.id}
+        tabindex="0"
+        role="button"
+        aria-label={mainTour.title}
+      >
+        <img
+          src={mainTour.image}
+          alt={mainTour.title}
+          class="absolute inset-0 w-full h-full object-cover"
+          loading="eager"
+        />
+        <div
+          class="absolute inset-0 bg-gradient-to-t from-black/95 via-black/20 to-transparent p-12 flex flex-col justify-end"
+        >
+          <h3 class="poppins text-white text-4xl md:text-5xl font-bold mb-4 leading-tight">
+            {mainTour.title}
+          </h3>
+          <div class="flex flex-wrap items-center gap-6">
+            <div class="bg-white/10 backdrop-blur-md border border-white/20 px-5 py-2 rounded-2xl">
+              <span class="poppins text-brand font-bold text-2xl">{mainTour.price}</span>
+            </div>
+            <a
+              href={mainTour.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              data-no-modal
+              class="poppins bg-brand text-black px-8 py-3 rounded-full font-bold text-xs uppercase tracking-widest hover:scale-105 transition-transform"
+            >
+              Reservar Ahora
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="lg:col-span-5 flex flex-col">
+        <div class="flex items-center justify-between mb-10 pb-4 border-b border-slate-100">
+          <h4 class="poppins text-2xl font-bold text-slate-800 tracking-tight">Experiencias Top</h4>
+          <span
+            class="poppins text-[10px] font-bold text-brand uppercase tracking-widest bg-slate-900 px-3 py-1 rounded-full"
+          >
+            Exclusive
+          </span>
+        </div>
+        <div class="grid grid-cols-2 gap-8 flex-grow">
+          {
+            sideTours.map((t, i) => (
+              <article
+                class="dest-side group cursor-pointer flex flex-col"
+                data-tour-id={t.id}
+                tabindex="0"
+                role="button"
+                aria-label={t.title}
+              >
+                <div class="relative aspect-[4/5] rounded-[2.5rem] overflow-hidden mb-5 shadow-xl isolate">
+                  <img
+                    src={t.image}
+                    alt={t.title}
+                    class="w-full h-full object-cover"
+                    loading="lazy"
+                  />
+                  <div class="absolute bottom-4 left-4 bg-black/40 backdrop-blur-md px-3 py-1 rounded-xl flex items-center gap-1.5 text-white text-[10px] font-bold">
+                    <Icon name="star" class="w-2.5 h-2.5 text-brand" fill="currentColor" />
+                    {(t.rating ?? 5).toFixed(1)}
+                  </div>
+                </div>
+                <h5
+                  class="poppins font-bold text-slate-800 text-[13px] leading-snug group-hover:text-brand transition-colors line-clamp-3 mb-2 flex-grow"
+                >
+                  {t.title}
+                </h5>
+                <p class="poppins text-brand font-bold text-base bg-slate-900 px-3 py-1 rounded-lg w-fit">
+                  {t.price}
+                </p>
+              </article>
+            ))
+          }
+        </div>
+        <a
+          href="/tours"
+          class="poppins w-full mt-10 py-5 border-2 border-slate-900 text-slate-900 rounded-2xl font-bold text-center hover:bg-slate-900 hover:text-white transition-all uppercase text-[10px] tracking-[0.2em] block"
+        >
+          Ver todas las actividades
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICIOS -->
+  <section class="bg-white border-y border-slate-100 py-24" aria-label="Servicios exclusivos">
+    <div class="container mx-auto px-6">
+      <div class="text-center mb-16 reveal">
+        <span class="poppins text-brand font-bold uppercase tracking-[0.3em] text-[10px] mb-3 block">
+          Comodidad y Lujo
+        </span>
+        <h2 class="poppins text-4xl md:text-5xl font-bold tracking-tighter text-slate-900 mb-4">
+          Servicios Exclusivos
+        </h2>
+        <p class="text-slate-500 max-w-2xl mx-auto text-lg">
+          Transporte, yates y logística privada para complementar tus vacaciones.
+        </p>
+      </div>
+      <div class="grid md:grid-cols-3 gap-8">
+        {featuredServices.map((service, i) => <TourCard item={service} delay={i * 80} />)}
+      </div>
+      <div class="mt-12 text-center">
+        <a
+          href="/servicios"
+          class="poppins inline-flex items-center gap-2 text-slate-900 font-bold hover:text-brand transition-all group"
+        >
+          Ver todos los servicios
+          <Icon name="arrow-right" class="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY US -->
+  <section class="py-24 bg-white" aria-label="Por qué elegirnos">
+    <div class="container mx-auto px-6">
+      <div class="flex flex-col md:flex-row gap-16 items-center">
+        <div class="md:w-1/2 reveal">
+          <span class="poppins text-brand font-bold uppercase tracking-[0.3em] text-[10px] mb-3 block">
+            Tranquilidad Total
+          </span>
+          <h2 class="poppins text-4xl md:text-5xl font-bold tracking-tighter text-slate-900 mb-6">
+            Tu tranquilidad es nuestra prioridad
+          </h2>
+          <p class="text-slate-500 text-lg mb-10">
+            Olvídate del estrés. Nosotros nos encargamos de toda la logística de tu viaje.
+          </p>
+          <div class="grid gap-6">
+            {
+              features.map((f) => (
+                <div class="flex gap-4 items-start">
+                  <div class="bg-slate-50 border border-slate-100 p-3 rounded-xl text-brand shrink-0">
+                    <Icon name={f.icon} class="w-6 h-6" />
+                  </div>
+                  <div>
+                    <h4 class="poppins font-bold text-slate-900 text-lg">{f.title}</h4>
+                    <p class="text-slate-500">{f.text}</p>
+                  </div>
+                </div>
+              ))
+            }
+          </div>
+        </div>
+        <div class="md:w-1/2 relative reveal">
+          <div class="absolute -inset-4 bg-brand/20 rounded-full blur-3xl opacity-40"></div>
+          <img
+            src="/imgs/Tu-tranquilidad-es-nuestra-prioridad.avif"
+            class="relative rounded-[2.5rem] shadow-2xl z-10 rotate-2 hover:rotate-0 transition-transform duration-500 border-4 border-white"
+            alt="Viajeros felices en Cancún"
+            loading="lazy"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- REVIEWS -->
+  <section class="py-24 bg-[#f6f8f8] border-t border-slate-100" aria-label="Reseñas">
+    <div class="container mx-auto px-6">
+      <div class="text-center mb-16 reveal">
+        <span class="poppins text-brand font-bold uppercase tracking-[0.3em] text-[10px] mb-3 block">
+          Testimonios
+        </span>
+        <h2 class="poppins text-4xl md:text-5xl font-bold tracking-tighter text-slate-900 mb-4">
+          Historias Reales
+        </h2>
+        <div class="w-16 h-[2px] bg-brand mx-auto rounded-full"></div>
+      </div>
+      <div class="grid md:grid-cols-3 gap-8">
+        {
+          REVIEWS.map((review) => (
+            <div class="bg-white p-8 rounded-3xl shadow-sm border border-slate-100">
+              <div class="flex gap-1 text-amber-400 mb-6">
+                {[...Array(5)].map(() => (
+                  <Icon name="star" class="w-4 h-4" fill="currentColor" />
+                ))}
+              </div>
+              <p class="text-slate-700 italic mb-8 text-lg leading-relaxed">"{review.text}"</p>
+              <div class="flex items-center gap-4 pt-6 border-t border-slate-50">
+                <img
+                  src={review.img}
+                  alt={review.name}
+                  class="w-10 h-10 rounded-full object-cover"
+                  loading="lazy"
+                />
+                <div>
+                  <h5 class="poppins font-bold text-slate-900 text-sm">{review.name}</h5>
+                  <span class="text-xs text-slate-400 font-medium uppercase tracking-wider">
+                    {review.date}
+                  </span>
+                </div>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="py-24 bg-white" aria-label="Preguntas frecuentes">
+    <div class="container mx-auto px-6 max-w-3xl">
+      <div class="text-center mb-16 reveal">
+        <span class="poppins text-brand font-bold uppercase tracking-[0.3em] text-[10px] mb-3 block">
+          Dudas
+        </span>
+        <h2 class="poppins text-3xl md:text-4xl font-bold tracking-tighter text-slate-900 mb-4">
+          Preguntas Frecuentes
+        </h2>
+        <p class="text-slate-500">Todo lo que necesitas saber antes de tu viaje.</p>
+      </div>
+      <div class="bg-white rounded-[2rem] border border-slate-100 shadow-sm divide-y divide-slate-100">
+        {
+          FAQS.map((faq, i) => (
+            <details class="group px-8" open={i === 0}>
+              <summary class="py-6 flex justify-between items-center cursor-pointer list-none">
+                <span class="poppins font-semibold text-slate-900 text-lg group-open:text-brand transition-colors">
+                  {faq.q}
+                </span>
+                <span class="p-2 rounded-full bg-slate-100 text-slate-500 group-open:bg-brand group-open:text-white transition-colors shrink-0 ml-4">
+                  <Icon name="plus" class="w-4 h-4 group-open:hidden" />
+                  <Icon name="minus" class="w-4 h-4 hidden group-open:block" />
+                </span>
+              </summary>
+              <p class="text-slate-500 pb-6 leading-relaxed">{faq.a}</p>
+            </details>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+</Layout>

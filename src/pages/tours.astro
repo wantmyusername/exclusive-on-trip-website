@@ -1,0 +1,106 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Icon from "../components/Icon.astro";
+import TourCard from "../components/TourCard.astro";
+import { SITE, TOURS, CATEGORIES } from "../data/content.js";
+---
+
+<Layout
+  title="Catálogo de Tours en Cancún y Riviera Maya"
+  description="Explora nuestra lista de tours: Xcaret, Chichén Itzá, Isla Mujeres, Cenotes y más. Precios exclusivos y reservación fácil por WhatsApp."
+>
+  <section class="pt-32 pb-24" aria-label="Catálogo de tours">
+    <div class="container mx-auto px-6">
+      <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
+        <div>
+          <div
+            class="poppins inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white border border-slate-100 text-slate-500 font-bold text-[10px] uppercase mb-6 shadow-sm"
+          >
+            <Icon name="sparkles" class="w-3 h-3 text-brand" />
+            <span id="tours-count">{TOURS.length}</span> Experiencias disponibles
+          </div>
+          <h1 class="poppins text-5xl md:text-7xl font-bold text-slate-900 tracking-tighter leading-[0.9]">
+            Vive <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand to-emerald-400">Cancún</span
+            ><br />a tu manera.
+          </h1>
+          <p class="mt-8 text-xs md:text-sm text-slate-500 tracking-wide">
+            ¿Buscas una experiencia personalizada?
+            <a
+              href={`https://wa.me/${SITE.whatsapp}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="font-semibold text-slate-900 hover:text-brand transition-colors"
+              >WhatsApp {SITE.phoneDisplay}</a
+            >
+          </p>
+        </div>
+
+        <div class="relative w-full md:w-auto">
+          <div class="flex gap-3 overflow-x-auto md:overflow-visible no-scrollbar pb-4 md:flex-wrap md:justify-end">
+            {
+              CATEGORIES.map((cat, i) => (
+                <button
+                  class:list={[
+                    "cat-btn snap-start shrink-0 px-6 md:px-8 py-2.5 rounded-xl poppins font-bold text-[10px] uppercase tracking-widest whitespace-nowrap shadow-sm border",
+                    i === 0
+                      ? "active bg-slate-900 text-white border-slate-900"
+                      : "bg-white text-slate-400 border-slate-200",
+                  ]}
+                  data-cat={cat}
+                >
+                  {cat}
+                </button>
+              ))
+            }
+          </div>
+        </div>
+      </div>
+
+      <div id="tours-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        {TOURS.map((tour, i) => <TourCard item={tour} delay={i * 35} />)}
+      </div>
+    </div>
+  </section>
+
+  <section class="pb-24" aria-label="Ayuda personalizada">
+    <div class="container mx-auto px-6">
+      <div
+        class="bg-white p-8 rounded-[2rem] shadow-sm border border-slate-100 text-center max-w-3xl mx-auto"
+      >
+        <h3 class="poppins text-xl font-bold text-slate-900 mb-2">¿Necesitas algo más específico?</h3>
+        <p class="text-slate-500 mb-6">
+          Organizamos bodas, eventos corporativos y logística para grupos grandes.
+        </p>
+        <a
+          href={`https://wa.me/${SITE.whatsapp}?text=${encodeURIComponent("Hola, necesito una cotización especial")}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="poppins inline-flex items-center gap-2 text-brand font-bold hover:gap-3 transition-all"
+        >
+          Contactar a un agente especializado <Icon name="arrow-right" class="w-4 h-4" />
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    const buttons = document.querySelectorAll(".cat-btn");
+    const cards = document.querySelectorAll("#tours-grid .tour-card");
+    const count = document.getElementById("tours-count");
+
+    buttons.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        buttons.forEach((b) => b.classList.remove("active"));
+        btn.classList.add("active");
+        const cat = btn.dataset.cat;
+        let visible = 0;
+        cards.forEach((card) => {
+          const show = cat === "Todos" || card.dataset.category === cat;
+          card.style.display = show ? "" : "none";
+          if (show) visible++;
+        });
+        if (count) count.textContent = visible;
+      });
+    });
+  </script>
+</Layout>

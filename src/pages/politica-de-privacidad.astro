@@ -1,0 +1,98 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { SITE } from "../data/content.js";
+
+const updated = new Date().toLocaleDateString("es-MX", { year: "numeric", month: "long" });
+---
+
+<Layout
+  title="Política de Privacidad"
+  description="Conoce cómo Exclusive On Trip recaba, usa y protege tus datos personales al reservar tours y servicios en Cancún y la Riviera Maya."
+>
+  <section class="pt-32 pb-24 bg-white">
+    <div class="container mx-auto px-6 max-w-3xl">
+      <span class="poppins text-brand font-bold uppercase tracking-[0.3em] text-[10px] mb-3 block">
+        Legal
+      </span>
+      <h1 class="poppins text-4xl md:text-5xl font-bold tracking-tighter text-slate-900 mb-4">
+        Política de Privacidad
+      </h1>
+      <p class="text-slate-400 text-sm mb-12">Última actualización: {updated}.</p>
+
+      <div class="space-y-10 text-slate-600 leading-relaxed">
+        <div>
+          <h2 class="poppins text-xl font-bold text-slate-900 mb-3">1. Responsable del tratamiento</h2>
+          <p>
+            {SITE.name} ("nosotros"), agencia de viajes con domicilio en {SITE.address}, es responsable
+            del tratamiento de los datos personales que nos proporcionas a través de este sitio web,
+            WhatsApp o correo electrónico.
+          </p>
+        </div>
+
+        <div>
+          <h2 class="poppins text-xl font-bold text-slate-900 mb-3">2. Datos que recabamos</h2>
+          <p class="mb-3">Podemos recabar los siguientes datos cuando solicitas una cotización o reserva:</p>
+          <ul class="list-disc pl-6 space-y-1">
+            <li>Nombre completo.</li>
+            <li>Número de teléfono y correo electrónico.</li>
+            <li>Fechas de viaje, número de personas y preferencias de la experiencia.</li>
+            <li>Información de pago procesada por terceros autorizados (no almacenamos datos de tarjetas).</li>
+          </ul>
+        </div>
+
+        <div>
+          <h2 class="poppins text-xl font-bold text-slate-900 mb-3">3. Finalidad del tratamiento</h2>
+          <p class="mb-3">Utilizamos tus datos para:</p>
+          <ul class="list-disc pl-6 space-y-1">
+            <li>Atender solicitudes de información y cotizaciones.</li>
+            <li>Gestionar reservas y coordinar la prestación de los servicios turísticos.</li>
+            <li>Enviarte confirmaciones, recordatorios y atención al cliente.</li>
+            <li>Mejorar nuestros productos y la experiencia en el sitio.</li>
+          </ul>
+        </div>
+
+        <div>
+          <h2 class="poppins text-xl font-bold text-slate-900 mb-3">4. Cookies y tecnologías similares</h2>
+          <p>
+            El sitio puede utilizar cookies y tecnologías de análisis para recordar preferencias y medir
+            el tráfico. Puedes deshabilitar las cookies desde la configuración de tu navegador, aunque
+            algunas funciones podrían no operar correctamente.
+          </p>
+        </div>
+
+        <div>
+          <h2 class="poppins text-xl font-bold text-slate-900 mb-3">5. Transferencia a terceros</h2>
+          <p>
+            Compartimos los datos estrictamente necesarios con proveedores de servicios turísticos,
+            procesadores de pago y herramientas de mensajería (por ejemplo, WhatsApp) para poder
+            completar tu reserva. No vendemos ni renta tus datos personales.
+          </p>
+        </div>
+
+        <div>
+          <h2 class="poppins text-xl font-bold text-slate-900 mb-3">6. Derechos ARCO</h2>
+          <p>
+            Tienes derecho a acceder, rectificar, cancelar u oponerte al tratamiento de tus datos
+            personales. Para ejercerlos, contáctanos por WhatsApp al {SITE.phoneDisplay}.
+          </p>
+        </div>
+
+        <div>
+          <h2 class="poppins text-xl font-bold text-slate-900 mb-3">7. Conservación y seguridad</h2>
+          <p>
+            Conservamos tus datos únicamente durante el tiempo necesario para las finalidades descritas
+            y aplicamos medidas razonables de seguridad para protegerlos.
+          </p>
+        </div>
+
+        <div>
+          <h2 class="poppins text-xl font-bold text-slate-900 mb-3">8. Cambios a esta política</h2>
+          <p>
+            Podemos actualizar esta política en cualquier momento. Publicaremos la versión vigente en
+            esta página con su fecha de actualización.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>

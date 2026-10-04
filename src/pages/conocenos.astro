@@ -1,0 +1,96 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Icon from "../components/Icon.astro";
+import { GALLERY_IMAGES } from "../data/content.js";
+
+const stats = [
+  { value: "8+", label: "Años de experiencia" },
+  { value: "15k+", label: "Viajeros felices" },
+  { value: "100%", label: "Agencia local" },
+];
+---
+
+<Layout
+  title="Conoce Exclusive On Trip | Expertos Locales en Cancún"
+  description="Somos una agencia local en Cancún con más de 8 años de experiencia creando vacaciones inolvidables. Conoce a nuestro equipo y clientes felices."
+>
+  <section class="pt-32 pb-24 bg-white min-h-screen" aria-label="Sobre nosotros">
+    <div class="container mx-auto px-6">
+      <!-- Intro -->
+      <div class="flex flex-col md:flex-row gap-12 items-center mb-24">
+        <div class="md:w-1/2 reveal">
+          <span class="poppins text-brand font-bold uppercase tracking-[0.3em] text-[10px] mb-3 block">
+            Sobre Nosotros
+          </span>
+          <h1 class="poppins text-4xl md:text-5xl font-bold tracking-tighter text-slate-900 mb-6">
+            Expertos locales, experiencias mundiales.
+          </h1>
+          <p class="text-slate-600 text-lg leading-relaxed mb-8">
+            Exclusive On Trip nació en 2016 con una misión simple: mostrar la verdadera magia del
+            Caribe Mexicano sin complicaciones. No somos un algoritmo, somos personas reales en
+            Cancún que conocen los mejores cenotes, las horas perfectas para navegar y los secretos
+            de la selva maya.
+          </p>
+          <div class="flex flex-wrap gap-10 border-t border-slate-100 pt-8">
+            {
+              stats.map((stat) => (
+                <div>
+                  <span class="block text-4xl font-bold text-brand poppins">{stat.value}</span>
+                  <span class="text-sm text-slate-500">{stat.label}</span>
+                </div>
+              ))
+            }
+          </div>
+        </div>
+        <div class="md:w-1/2 reveal">
+          <div
+            class="img-soft rounded-[2.5rem] overflow-hidden shadow-2xl rotate-1 hover:rotate-0 transition-transform duration-500"
+          >
+            <img
+              src="/imgs/siva.webp"
+              class="w-full h-full object-cover"
+              alt="Siva, mascota de Exclusive On Trip"
+              loading="lazy"
+            />
+          </div>
+        </div>
+      </div>
+
+      <!-- Galería -->
+      <div class="mb-14 text-center reveal">
+        <span class="poppins text-brand font-bold uppercase tracking-[0.3em] text-[10px] mb-3 block">
+          Galería
+        </span>
+        <h2 class="poppins text-3xl md:text-5xl font-bold tracking-tighter text-slate-900 mb-4">
+          Nuestros Clientes Felices
+        </h2>
+        <p class="text-slate-500">Momentos reales de gente real disfrutando con nosotros.</p>
+      </div>
+
+      <div class="columns-1 md:columns-2 lg:columns-3 gap-6 space-y-6">
+        {
+          GALLERY_IMAGES.map((src, idx) => (
+            <div class="break-inside-avoid rounded-2xl overflow-hidden shadow-lg group">
+              <img
+                src={src}
+                alt={`Cliente de Exclusive On Trip ${idx + 1}`}
+                class="w-full h-auto transform transition-transform duration-500 group-hover:scale-105"
+                loading="lazy"
+              />
+            </div>
+          ))
+        }
+      </div>
+
+      <!-- CTA -->
+      <div class="mt-20 text-center reveal">
+        <a
+          href="/tours"
+          class="poppins inline-flex items-center gap-2 bg-brand text-slate-900 px-10 py-5 rounded-full font-bold text-xs uppercase tracking-widest hover:scale-105 transition-transform shadow-2xl"
+        >
+          Descubre nuestros tours <Icon name="arrow-right" class="w-4 h-4" />
+        </a>
+      </div>
+    </div>
+  </section>
+</Layout>

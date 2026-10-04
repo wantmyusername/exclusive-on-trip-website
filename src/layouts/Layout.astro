@@ -1,0 +1,186 @@
+---
+import "../styles/global.css";
+import Navbar from "../components/Navbar.astro";
+import Footer from "../components/Footer.astro";
+import TourModal from "../components/TourModal.astro";
+import { SITE, ALL_ITEMS } from "../data/content.js";
+
+const { title, description, image } = Astro.props;
+const fullTitle = title ? `${title} | ${SITE.name}` : `${SITE.name} | Tours exclusivos en Cancún`;
+const desc = description || SITE.tagline;
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+const ogImage = image || SITE.logo;
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "TravelAgency",
+  name: SITE.name,
+  url: SITE.url,
+  description: desc,
+  logo: SITE.logo,
+  telephone: SITE.phoneDisplay,
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: "Av. Bonampak",
+    addressLocality: "Cancún",
+    addressRegion: "Quintana Roo",
+    addressCountry: "MX",
+  },
+  sameAs: [SITE.facebook, SITE.instagram],
+};
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={desc} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" type="image/png" href={SITE.logoMark} />
+
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={desc} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content={ogImage} />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&family=Poppins:wght@300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  </head>
+  <body class="text-slate-900 min-h-screen flex flex-col">
+    <Navbar />
+    <main class="flex-grow">
+      <slot />
+    </main>
+    <Footer />
+
+    <TourModal items={ALL_ITEMS} />
+
+    <script>
+      // --- Navbar ---
+      const navbar = document.getElementById("navbar");
+      if (navbar) {
+        const isHome = navbar.dataset.home === "true";
+        const onScroll = () => {
+          if (!isHome) {
+            navbar.classList.add("is-solid");
+            return;
+          }
+          navbar.classList.toggle("is-solid", window.scrollY > 40);
+        };
+        onScroll();
+        window.addEventListener("scroll", onScroll, { passive: true });
+      }
+
+      // --- Mobile menu ---
+      const menu = document.getElementById("mobile-menu");
+      const closeMenu = () => {
+        menu?.classList.remove("open");
+        document.body.style.overflow = "";
+      };
+      document.getElementById("menu-open-btn")?.addEventListener("click", () => {
+        menu?.classList.add("open");
+        document.body.style.overflow = "hidden";
+      });
+      document.getElementById("menu-close-btn")?.addEventListener("click", closeMenu);
+
+      // --- Hero random image ---
+      const hero = document.getElementById("hero-img");
+      if (hero) {
+        const src = document.getElementById("hero-images")?.textContent;
+        try {
+          const imgs = JSON.parse(src || "[]");
+          if (imgs.length) {
+            hero.src = imgs[Math.floor(Math.random() * imgs.length)];
+          }
+        } catch (e) {}
+        hero.addEventListener("load", () => hero.classList.add("loaded"));
+      }
+
+      // --- Modal ---
+      const modal = document.getElementById("tour-modal");
+      let toursData = [];
+      try {
+        toursData = JSON.parse(document.getElementById("tours-json")?.textContent || "[]");
+      } catch (e) {}
+      const byId = Object.fromEntries(toursData.map((t) => [t.id, t]));
+
+      const CHECK = `<svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>`;
+
+      function openModal(id) {
+        const t = byId[id];
+        if (!t || !modal) return;
+        document.getElementById("modal-img").src = t.image;
+        document.getElementById("modal-img").alt = t.title;
+        document.getElementById("modal-title").textContent = t.title;
+        document.getElementById("modal-desc").textContent = t.desc;
+        document.getElementById("modal-rating").textContent = (t.rating ?? 5).toFixed(1);
+        document.getElementById("modal-reviews").textContent = `${t.reviews || 0} reseñas`;
+        document.getElementById("modal-duration").textContent = t.duration || "Flexible";
+        document.getElementById("modal-price").textContent = t.price;
+        document.getElementById("modal-link").href = t.link || "#";
+        document.getElementById("modal-highlights").innerHTML = (t.details || [])
+          .map(
+            (d) =>
+              `<div class="highlight-item flex items-center gap-3 p-3 rounded-xl bg-teal-50 text-teal-700 font-medium text-xs">${CHECK}${d}</div>`,
+          )
+          .join("");
+        modal.classList.add("open");
+        document.body.style.overflow = "hidden";
+      }
+      function closeModal() {
+        modal?.classList.remove("open");
+        document.body.style.overflow = "";
+      }
+
+      document.addEventListener("click", (e) => {
+        if (e.target.closest("[data-no-modal]")) return;
+        if (e.target.closest("#modal-close") || e.target.closest("#modal-backdrop")) {
+          closeModal();
+          return;
+        }
+        const trigger = e.target.closest("[data-tour-id]");
+        if (trigger) openModal(trigger.dataset.tourId);
+      });
+
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") {
+          closeModal();
+          closeMenu();
+        }
+        if ((e.key === "Enter" || e.key === " ") && e.target.closest?.("[data-tour-id]")) {
+          e.preventDefault();
+          openModal(e.target.closest("[data-tour-id]").dataset.tourId);
+        }
+      });
+
+      // --- Reveal on scroll ---
+      const revealEls = document.querySelectorAll(".reveal");
+      if ("IntersectionObserver" in window) {
+        const io = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("in");
+                io.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.12 },
+        );
+        revealEls.forEach((el) => io.observe(el));
+      } else {
+        revealEls.forEach((el) => el.classList.add("in"));
+      }
+    </script>
+  </body>
+</html>

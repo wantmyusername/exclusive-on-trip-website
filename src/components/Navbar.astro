@@ -1,0 +1,111 @@
+---
+import Icon from "./Icon.astro";
+import { SITE } from "../data/content.js";
+
+const path = Astro.url.pathname;
+const isHome = path === "/";
+
+const links = [
+  { href: "/", label: "INICIO", icon: "home" },
+  { href: "/tours", label: "TOURS", icon: "compass" },
+  { href: "/servicios", label: "SERVICIOS", icon: "anchor" },
+  { href: "/conocenos", label: "CONÓCENOS", icon: "users" },
+  { href: SITE.blog, label: "BLOG", icon: "sparkles", external: true },
+];
+
+const isActive = (href) => !href.startsWith("http") && path === href;
+---
+
+<nav
+  id="navbar"
+  data-home={isHome ? "true" : "false"}
+  class:list={["fixed w-full z-[100] top-0 left-0 py-5 px-6", { "is-solid": !isHome }]}
+>
+  <div class="container mx-auto flex justify-between items-center">
+    <a href="/" class="flex items-center gap-2 shrink-0">
+      <img
+        src={SITE.logoMark}
+        class="h-9 md:h-10 w-auto drop-shadow-sm"
+        alt={SITE.name}
+      />
+      <span class="brand-name poppins text-base md:text-xl font-bold tracking-tighter transition-colors duration-500">
+        EXCLUSIVE ON TRIP
+      </span>
+    </a>
+
+    <div class="hidden md:flex items-center gap-1">
+      {
+        links.map((link) => (
+          <a
+            href={link.href}
+            target={link.external ? "_blank" : undefined}
+            rel={link.external ? "noopener noreferrer" : undefined}
+            class="nav-link relative poppins px-4 lg:px-5 py-2 text-[11px] font-semibold tracking-widest flex items-center gap-2 transition-opacity"
+          >
+            <span class="flex items-center gap-2">
+              <Icon name={link.icon} class="w-3.5 h-3.5" />
+              {link.label}
+            </span>
+            {isActive(link.href) && (
+              <span class="absolute bottom-0 left-5 right-5 h-0.5 bg-brand rounded-full" />
+            )}
+          </a>
+        ))
+      }
+      <div class="h-6 w-px bg-slate-300/30 mx-3"></div>
+      <a
+        href={`https://wa.me/${SITE.whatsapp}`}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="poppins px-6 py-3 rounded-full bg-slate-900 text-white hover:scale-105 transition-transform shadow-xl text-[11px] font-semibold tracking-widest flex items-center gap-2"
+      >
+        <Icon name="ticket" class="w-3.5 h-3.5" />
+        CONTÁCTANOS
+      </a>
+    </div>
+
+    <button id="menu-open-btn" class="md:hidden p-2 menu-btn" aria-label="Abrir menú">
+      <Icon name="menu" class="w-8 h-8" />
+    </button>
+  </div>
+</nav>
+
+<div id="mobile-menu" role="dialog" aria-modal="true" aria-label="Menú">
+  <div class="flex items-center justify-between px-6 h-[80px] border-b border-slate-100">
+    <span class="poppins text-lg font-bold text-slate-900 tracking-tight">EXCLUSIVE ON TRIP</span>
+    <button id="menu-close-btn" class="p-2 rounded-xl bg-slate-100" aria-label="Cerrar">
+      <Icon name="x" class="w-6 h-6" />
+    </button>
+  </div>
+  <div class="flex flex-col px-6 py-12 gap-4">
+    {
+      links.map((link) => (
+        <a href={link.href} class="bg-slate-50 rounded-2xl px-6 py-5 flex items-center justify-between group">
+          <div class="flex items-center gap-4">
+            <div class="p-3 bg-white rounded-xl shadow-sm">
+              <Icon name={link.icon} class="w-5 h-5" />
+            </div>
+            <span class="poppins text-lg font-medium text-slate-900">{link.label}</span>
+          </div>
+          <Icon
+            name="arrow-right"
+            class="w-4 h-4 text-slate-400 group-hover:translate-x-1 transition-transform"
+          />
+        </a>
+      ))
+    }
+  </div>
+  <div class="mt-auto px-6 pb-8">
+    <div class="bg-slate-900 rounded-3xl p-6 shadow-2xl text-center">
+      <p class="text-white text-[10px] uppercase tracking-widest mb-4 opacity-70">Agencia #1 en Cancún</p>
+      <a
+        href={`https://wa.me/${SITE.whatsapp}`}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="poppins block w-full bg-brand text-slate-900 py-5 rounded-2xl font-bold uppercase text-xs tracking-widest"
+      >
+        Reservar por WhatsApp
+      </a>
+    </div>
+  </div>
+</div>

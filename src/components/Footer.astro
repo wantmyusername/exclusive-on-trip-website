@@ -1,0 +1,102 @@
+---
+import Icon from "./Icon.astro";
+import { SITE } from "../data/content.js";
+
+const year = new Date().getFullYear();
+---
+
+<footer class="bg-white border-t border-slate-100 pt-24 pb-12">
+  <div class="container mx-auto px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-20">
+    <div>
+      <img src={SITE.logo} alt={SITE.name} class="h-10 mb-8" />
+      <p class="text-slate-500 text-sm leading-relaxed font-medium mb-8">
+        Expertos en crear memorias inolvidables en el Caribe Mexicano. Tours y servicios exclusivos
+        diseñados a tu medida.
+      </p>
+      <div class="flex gap-3">
+        <a
+          href={SITE.facebook}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Facebook"
+          class="w-10 h-10 rounded-full bg-slate-50 border border-slate-100 flex items-center justify-center text-slate-500 hover:bg-[#1877F2] hover:text-white hover:border-transparent transition-colors"
+        >
+          <Icon name="facebook" class="w-5 h-5" />
+        </a>
+        <a
+          href={SITE.instagram}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Instagram"
+          class="w-10 h-10 rounded-full bg-slate-50 border border-slate-100 flex items-center justify-center text-slate-500 hover:bg-[#E4405F] hover:text-white hover:border-transparent transition-colors"
+        >
+          <Icon name="instagram" class="w-5 h-5" />
+        </a>
+      </div>
+    </div>
+
+    <div>
+      <h4 class="poppins font-bold text-slate-900 text-[10px] uppercase tracking-[0.2em] mb-8">
+        Navegación
+      </h4>
+      <ul class="flex flex-col gap-4 text-sm text-slate-500">
+        <li><a href="/" class="hover:text-brand transition-colors">Inicio</a></li>
+        <li><a href="/tours" class="hover:text-brand transition-colors">Catálogo de Tours</a></li>
+        <li><a href="/servicios" class="hover:text-brand transition-colors">Servicios Exclusivos</a></li>
+        <li><a href="/conocenos" class="hover:text-brand transition-colors">Conócenos</a></li>
+        <li>
+          <a href={SITE.blog} class="hover:text-brand transition-colors">Nuestro Blog</a>
+        </li>
+      </ul>
+    </div>
+
+    <div>
+      <h4 class="poppins font-bold text-slate-900 text-[10px] uppercase tracking-[0.2em] mb-8">
+        Atención VIP
+      </h4>
+      <div class="flex flex-col gap-4 text-sm text-slate-500">
+        <div class="flex items-start gap-3">
+          <Icon name="map-pin" class="w-4 h-4 text-brand shrink-0 mt-0.5" />
+          <span>{SITE.address}</span>
+        </div>
+        <a
+          href={`https://wa.me/${SITE.whatsapp}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="flex items-center gap-3 hover:text-brand transition-colors"
+        >
+          <Icon name="phone" class="w-4 h-4 text-brand shrink-0" />
+          WhatsApp {SITE.phoneDisplay}
+        </a>
+      </div>
+    </div>
+
+    <div>
+      <div class="bg-slate-50 p-6 rounded-[2rem] border border-slate-100">
+        <div class="flex items-center gap-4 mb-4">
+          <Icon name="shield-check" class="w-8 h-8 text-brand" />
+          <span class="poppins font-bold text-slate-900 text-xs">COMPRA SEGURA</span>
+        </div>
+        <div class="flex flex-wrap gap-2 pt-4 border-t border-slate-200">
+          {
+            ["VISA", "MASTERCARD", "AMEX", "PAYPAL"].map((brand) => (
+              <span class="px-2 py-1 bg-white border border-slate-200 rounded text-[7px] font-bold italic text-slate-400">
+                {brand}
+              </span>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div
+    class="container mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4 text-[10px] font-medium text-slate-400 uppercase tracking-widest pt-10 border-t border-slate-50"
+  >
+    <span>© {year} {SITE.name}</span>
+    <div class="flex gap-6">
+      <a href="/politica-de-privacidad" class="hover:text-slate-700 transition-colors">Política de Privacidad</a>
+      <a href="/terminos-y-condiciones" class="hover:text-slate-700 transition-colors">Términos y Condiciones</a>
+    </div>
+  </div>
+</footer>

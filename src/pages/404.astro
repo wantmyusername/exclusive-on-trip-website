@@ -1,0 +1,37 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Icon from "../components/Icon.astro";
+---
+
+<Layout
+  title="Página no encontrada"
+  description="La página que buscas no existe o cambió de lugar. Vuelve a nuestro catálogo de tours en Cancún."
+>
+  <section class="min-h-screen flex items-center justify-center bg-[#f6f8f8] px-6 py-32">
+    <div class="text-center max-w-xl">
+      <span class="poppins block text-[120px] md:text-[180px] font-black leading-none tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-brand to-emerald-400">
+        404
+      </span>
+      <h1 class="poppins text-3xl md:text-4xl font-bold text-slate-900 mt-4 mb-4">
+        Te perdiste en el paraíso
+      </h1>
+      <p class="text-slate-500 text-lg mb-10">
+        La página que buscas no existe o cambió de lugar. Mejor regresemos a la aventura.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a
+          href="/"
+          class="poppins inline-flex items-center justify-center gap-2 bg-slate-900 text-white px-8 py-4 rounded-full font-bold text-xs uppercase tracking-widest hover:scale-105 transition-transform shadow-xl"
+        >
+          <Icon name="home" class="w-4 h-4" /> Volver al inicio
+        </a>
+        <a
+          href="/tours"
+          class="poppins inline-flex items-center justify-center gap-2 bg-brand text-slate-900 px-8 py-4 rounded-full font-bold text-xs uppercase tracking-widest hover:scale-105 transition-transform shadow-xl"
+        >
+          <Icon name="compass" class="w-4 h-4" /> Ver tours
+        </a>
+      </div>
+    </div>
+  </section>
+</Layout>

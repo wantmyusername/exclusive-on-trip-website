@@ -1,0 +1,112 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { SITE } from "../data/content.js";
+
+const updated = new Date().toLocaleDateString("es-MX", { year: "numeric", month: "long" });
+---
+
+<Layout
+  title="Términos y Condiciones"
+  description="Términos y condiciones de reserva, pagos, cancelaciones y responsabilidad para los tours y servicios de Exclusive On Trip en Cancún."
+>
+  <section class="pt-32 pb-24 bg-white">
+    <div class="container mx-auto px-6 max-w-3xl">
+      <span class="poppins text-brand font-bold uppercase tracking-[0.3em] text-[10px] mb-3 block">
+        Legal
+      </span>
+      <h1 class="poppins text-4xl md:text-5xl font-bold tracking-tighter text-slate-900 mb-4">
+        Términos y Condiciones
+      </h1>
+      <p class="text-slate-400 text-sm mb-12">Última actualización: {updated}.</p>
+
+      <div class="space-y-10 text-slate-600 leading-relaxed">
+        <div>
+          <h2 class="poppins text-xl font-bold text-slate-900 mb-3">1. Aceptación</h2>
+          <p>
+            Al reservar o utilizar cualquiera de los tours y servicios ofrecidos por {SITE.name},
+            aceptas los presentes Términos y Condiciones en su totalidad.
+          </p>
+        </div>
+
+        <div>
+          <h2 class="poppins text-xl font-bold text-slate-900 mb-3">2. Reservas y cotizaciones</h2>
+          <p>
+            Las reservas se realizan por WhatsApp, correo electrónico o mediante nuestros agentes. La
+            disponibilidad de cada experiencia está sujeta a confirmación. Las cotizaciones tienen
+            vigencia hasta por 24 horas o según lo indique el agente.
+          </p>
+        </div>
+
+        <div>
+          <h2 class="poppins text-xl font-bold text-slate-900 mb-3">3. Precios y pagos</h2>
+          <p>
+            Los precios se muestran en pesos mexicanos (MXN) y pueden variar según temporada, número de
+            personas y operador. Manejamos el esquema de <strong>"paga al abordar"</strong>: se reserva
+            tu lugar y se liquida el día de la actividad, salvo que se acuerde lo contrario. No
+            solicitamos depósitos para confirmar tu lugar.
+          </p>
+        </div>
+
+        <div>
+          <h2 class="poppins text-xl font-bold text-slate-900 mb-3">4. Cancelaciones y reembolsos</h2>
+          <p>
+            Puedes cancelar sin costo avisando con al menos 24 horas de anticipación, salvo en
+            experiencias privadas o de temporada alta con condiciones especiales. Si el operador cancela
+            la actividad, podrás reprogramarla o recibir el reembolso correspondiente.
+          </p>
+        </div>
+
+        <div>
+          <h2 class="poppins text-xl font-bold text-slate-900 mb-3">5. Cambios por clima u operación</h2>
+          <p>
+            Algunas actividades dependen del clima y de la Capitanía de Puerto. En caso de cierre de
+            navegación o condiciones de seguridad, reprogramaremos la actividad o aplicaremos el
+            reembolso conforme a la política anterior.
+          </p>
+        </div>
+
+        <div>
+          <h2 class="poppins text-xl font-bold text-slate-900 mb-3">6. Responsabilidad del viajero</h2>
+          <p>
+            El viajero se compromete a proporcionar información veraz, a llegar puntualmente al punto de
+            recolección y a seguir las indicaciones de seguridad del operador. No nos hacemos
+            responsables por objetos personales olvidados o daños derivados del incumplimiento de las
+            instrucciones del guía.
+          </p>
+        </div>
+
+        <div>
+          <h2 class="poppins text-xl font-bold text-slate-900 mb-3">7. Responsabilidad de la agencia</h2>
+          <p>
+            {SITE.name} actúa como intermediario entre el viajero y los operadores turísticos. Los
+            servicios son prestados por terceros certificados; nuestra responsabilidad se limita a la
+            correcta gestión de la reserva y la comunicación con el operador.
+          </p>
+        </div>
+
+        <div>
+          <h2 class="poppins text-xl font-bold text-slate-900 mb-3">8. Propiedad intelectual</h2>
+          <p>
+            Todo el contenido de este sitio (textos, logotipos, imágenes y diseño) es propiedad de
+            {" "}{SITE.name} o de sus respectivos titulares y no puede reproducirse sin autorización.
+          </p>
+        </div>
+
+        <div>
+          <h2 class="poppins text-xl font-bold text-slate-900 mb-3">9. Ley aplicable</h2>
+          <p>
+            Estos términos se rigen por las leyes de los Estados Unidos Mexicanos. Cualquier
+            controversia se someterá a los tribunales competentes de Cancún, Quintana Roo.
+          </p>
+        </div>
+
+        <div>
+          <h2 class="poppins text-xl font-bold text-slate-900 mb-3">10. Contacto</h2>
+          <p>
+            Para dudas sobre estos términos, escríbenos por WhatsApp al {SITE.phoneDisplay}.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>
