@@ -2,6 +2,8 @@
 
 Sitio web oficial de **Exclusive On Trip**, agencia de tours y experiencias exclusivas en Cancún y la Riviera Maya.
 
+🔗 **Sitio en vivo:** [https://exclusiveontrip.com/](https://exclusiveontrip.com/)
+
 Construido con [Astro](https://astro.build) y [Tailwind CSS v4](https://tailwindcss.com). 100% estático (sin React), optimizado para SEO y velocidad.
 
 ## ✨ Características
